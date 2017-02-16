@@ -338,7 +338,8 @@ hooks.suppressDeprecationWarnings = false;
 hooks.deprecationHandler = null;
 
 function isFunction(input) {
-    return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+    // return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+    return typeof input === 'function' || Object.prototype.toString.call(input) === '[object Function]';
 }
 
 function set (config) {
@@ -644,7 +645,8 @@ function makeFormatFunction(format) {
     return function (mom) {
         var output = '', i;
         for (i = 0; i < length; i++) {
-            output += array[i] instanceof Function ? array[i].call(mom, format) : array[i];
+            // output += array[i] instanceof Function ? array[i].call(mom, format) : array[i];
+            output += typeof array[i] === 'function' ? array[i].call(mom, format) : array[i];
         }
         return output;
     };
